@@ -41,7 +41,7 @@ void Dijk(int Grph[5][5],int S)
                 dis[m]=dis[i]+Grph[i][m];
         }
     }
-    cout<<"The Distance from source vertex to destination vertex"<<endl;
+    cout<<"The Distance from source vertex"<<endl;
     for(int m=0; m<5; m++)                      
     { 
         char s = 65+m; 
