@@ -1,0 +1,63 @@
+<html>
+<body>
+<script>	
+let v = 5;
+function Min_Dis(dist,dist_short)
+{
+	
+	var low = Number.MAX_VALUE;
+	var low_index = -1;
+	
+	for(var a = 0; a < v; a++)
+	{
+		if (dist_short[a] == false && dist[a] <= low)
+		{
+			low = dist[a];
+			low_index = a;
+		}
+	}
+	return low_index;
+}
+function Dijk(dist)
+{
+	document.write("Vertex &emsp;Distance from Source<br>");
+	for(var a = 0; a < v; a++)
+	{
+		document.write(a + "   "+  dist[a] + "<br>");
+	}
+}
+function Dijk_fn(GRAPH, S)
+{
+	var dist = new Array(v);
+	var dist_short = new Array(v);
+	for(var a = 0; a < v; a++)
+	{
+		dist[a] = Number.MAX_VALUE;
+		dist_short[a] = false;
+	}
+	dist[S] = 0;
+	for(var n = 0; n < v - 1; n++)
+	{
+		var x = Min_Dis(dist, dist_short);
+		dist_short[x] = true;
+		for(var y = 0; y < v; y++)
+		{
+			if (!dist_short[y] && GRAPH[x][y] != 0 &&
+				dist[x] != Number.MAX_VALUE &&
+				dist[x] + GRAPH[x][y] < dist[y])
+			{
+				dist[y] = dist[x] + GRAPH[x][y];
+			}
+		}
+	}
+  Dijk(dist);
+}
+let GRAPH = [ [ 0, 2, 0, 0, 1],
+			  [ 5, 0, 7, 0, 0],
+			  [ 0, 8, 0, 0, 0],
+			  [ 0, 0, 4, 0, 9],
+			  [ 0, 0, 0, 6, 0]]
+Dijk_fn(GRAPH, 0);
+</script>
+</body>
+</html>
